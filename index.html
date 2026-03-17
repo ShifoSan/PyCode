@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Web Pydroid</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CodeMirror Core -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <!-- CodeMirror Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/monokai.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <!-- CodeMirror Python Mode -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Main Editor View -->
+    <div id="editor-view" class="view active">
+        <!-- Top Navigation Bar -->
+        <header class="top-bar">
+            <button class="icon-btn" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="file-info">
+                <span class="file-name">new*</span>
+            </div>
+            <div class="top-actions">
+                <input type="password" id="api-key-input" placeholder="Gemini API Key" aria-label="API Key">
+                <button class="icon-btn" id="ai-check-btn" aria-label="AI Check" title="Analyze with AI">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Code Editor Area -->
+        <main class="editor-container">
+            <textarea id="code-editor">print("Hello, Pydroid!")</textarea>
+        </main>
+
+        <!-- Floating Action Button (Run) -->
+        <button id="run-btn" class="fab" aria-label="Run Code">
+            <i class="fa-solid fa-play"></i>
+        </button>
+    </div>
+
+    <!-- Full-Screen Terminal View -->
+    <div id="terminal-view" class="view">
+        <header class="terminal-header">
+            <button id="back-to-editor-btn" class="icon-btn" aria-label="Back">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <span>Terminal</span>
+        </header>
+        <div id="terminal-output"></div>
+    </div>
+
+    <!-- AI Check Modal Overlay -->
+    <div id="ai-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>AI Assistant</h3>
+                <button id="close-modal-btn" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Loading State -->
+            <div id="ai-loading" class="hidden">
+                <i class="fa-solid fa-circle-notch fa-spin"></i> Analyzing code...
+            </div>
+
+            <!-- Results State -->
+            <div id="ai-results" class="hidden">
+                <h4 id="ai-status">Status</h4>
+                <p id="ai-explanation">Explanation goes here.</p>
+                <button id="let-ai-fix-btn" class="primary-btn">Let AI Fix It</button>
+            </div>
+
+            <!-- Preview State -->
+            <div id="ai-preview" class="hidden">
+                <h4>Preview Fix:</h4>
+                <pre><code id="ai-fixed-code"></code></pre>
+                <div class="modal-actions">
+                    <button id="accept-fix-btn" class="success-btn">Accept</button>
+                    <button id="cancel-fix-btn" class="secondary-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
