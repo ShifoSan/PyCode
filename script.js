@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // === API Calling Logic ===
     async function callGeminiAPI(apiKey, code) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key=${apiKey}`;
 
         const promptText = `
         Analyze the following Python code for any syntax or logical errors, or potential improvements.
