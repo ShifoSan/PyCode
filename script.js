@@ -62,6 +62,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                     terminalOutput.scrollTop = terminalOutput.scrollHeight;
                 }
             });
+
+            // Override built-in input() to show a browser prompt
+            await pyodideInstance.runPythonAsync(`
+                import builtins
+                import js
+
+                def custom_input(prompt_text=''):
+                    return js.prompt(prompt_text) or ""
+
+                builtins.input = custom_input
+            `);
+
             pyodideReady = true;
             console.log("Pyodide loaded successfully");
         } catch (err) {
